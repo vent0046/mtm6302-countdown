@@ -1,0 +1,14 @@
+.output {
+    align-content: center;
+  }
+
+  form#form{
+      text-align: center;
+  }
+  
+  .weekday {
+    margin-bottom: 1rem;
+    color: indianred;
+    font-size: 1.5rem;
+    text-align: center;
+  }
