@@ -7,15 +7,22 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <main class="output">
-        <div id="response" class="weekday">&nbsp;</div>
+
+    <main id='container' class="output"></main>
+        
         <form id="form">
-          <select id="year"></select> /
-          <select id="month"></select> / 
+            <label>Year</label>
+          <select id="year"></select> 
+
+          <label>Month</label>
+          <select id="month"></select> 
+
+          <label>Day</label>
           <select id="day"></select>
+
           <button>Initiate Countdown</button>
         </form>
-    </main>
+    
 </body>
 <script src="luxon.min.js"></script>
 <script src="script.js"></script>

@@ -1,14 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Prompt&display=swap');
+
 .output {
     align-content: center;
   }
 
   form#form{
       text-align: center;
+      
   }
   
+/*   
   .weekday {
     margin-bottom: 1rem;
     color: indianred;
     font-size: 1.5rem;
     text-align: center;
+  } */
+
+  .output{
+    margin-bottom: 1rem;
+    color: rgb(7, 17, 24);
+    font-size: 5.5rem;
+    text-align: center;
+    font-family: 'Bebas Neue', cursive;
+  }
+
+  label{
+    padding-left: 25px;
+    padding-right: 5px;
+    font-size: 2rem;
+    font-family: 'Prompt', sans-serif;
   }

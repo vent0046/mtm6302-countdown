@@ -3,8 +3,13 @@ const $form = document.getElementById('form')
 const $day = document.getElementById('day')
 const $month = document.getElementById('month')
 const $year = document.getElementById('year')
+const $container = document.getElementById('container')
 
 const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+let difference = null
+
+let diff = null
 
 let date = new Date()
 
@@ -15,11 +20,13 @@ let dateToStore = {
   day: date.getDate()
 }
 
-localStorage.setItem('targetDate', JSON.stringify(dateToStore));
+localStorage.setItem('container', JSON.stringify(dateToStore));
+
+retrievedObject = localStorage.getItem('container')
 
 let dateFromLocalStorage = {}
 
-console.log(JSON.parse(localStorage.getItem('targetDate')))
+console.log(JSON.parse(localStorage.getItem('container')))
 
 let years = []
 for (let i = 2020; i <= 2050; i++) {
@@ -70,28 +77,65 @@ $form.addEventListener('submit', function (event) {
   })
   
   if (date > now) {
-    const diff = date.diff(now, ['days', 'hours', 'minutes', 'seconds']).toObject()
-    
-      $response.textContent = `${diff.days} days ${diff.hours} hours ${diff.minutes} minutes ${diff.seconds} seconds`
-      
+     diff = date.diff(now, ['days', 'hours', 'minutes', 'seconds'])
+  console.log(diff)
+
+  difference = diff.as('milliseconds')
+
+      setInterval(function (){
+
+  
+
+  difference -= 1000
+
+  $container.innerHTML = `
+  ${toDays(difference)} days
+
+  ${toHours(difference)} hours
+
+  ${toMinutes(difference)} minutes
+
+  ${toSeconds(difference)} seconds
+  `
+}, 1000)
   }
 })
 
-let startingTime = {
-  hours: date.getHours(),
-  minutes: date.getMinutes(),
-  seconds: date.getSeconds()
+
+function toDays (ms) {
+  return Math.floor(ms / 1000 / 60 / 60 / 24)
 }
 
-setInterval(function (){
+function toHours(ms) {
 
-  startingTime.seconds -= 1
+  let days = Math.floor(ms/ 1000 / 60 / 60 / 24)
+  let hours = Math.floor(ms/ 1000 / 60 / 60)
+
+  let remainingHours = hours - (days * 24)
+
+  return remainingHours
+}
+
+function toMinutes(ms) {
+  
+  let hours = Math.floor(ms / 1000 / 60 / 60)
+  let minutes = Math.floor(ms / 1000 / 60)
+
+  let remainingMinutes = minutes - (hours * 60)
+
+  return remainingMinutes
+}
+
+function toSeconds(ms) {
+  let minutes = Math.floor(ms / 1000 / 60)
+  let seconds = Math.floor(ms/ 1000)
+
+  let remainingSeconds = seconds - (minutes * 60)
+
+  return remainingSeconds
+}
 
 
-  $response.innerHTML =  `
-  ${startingTime.hours} Hours
-  ${startingTime.minutes} Minutes
-  ${startingTime.seconds} Seconds
-  `
-}, 1000)
+
+
 
